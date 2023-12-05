@@ -7,14 +7,29 @@
     android:padding="16dp">
 
     <!-- Image View for Plant Image -->
-    <ImageView
-        android:id="@+id/imageViewPlantDetail"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background" /> <!-- Replace with your default image or drawable -->
+        android:layout_height="wrap_content">
 
-    <!-- Edit Text for Plant Title -->
+        <ImageView
+            android:id="@+id/imageViewPlantDetail"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabEditImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|top"
+            android:layout_margin="8dp"
+            android:src="@android:drawable/ic_menu_edit" /> <!-- Replace with your edit icon -->
+
+        <!-- Your other views, such as EditTexts, Buttons, etc. -->
+
+    </FrameLayout>
+
     <EditText
         android:id="@+id/editTextPlantTitle"
         android:layout_width="match_parent"

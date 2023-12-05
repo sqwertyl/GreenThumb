@@ -1,64 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlantDetailedView">
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <!-- Image View for Plant Image -->
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        android:id="@+id/imageViewPlantDetail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background" /> <!-- Replace with your default image or drawable -->
 
+    <!-- Edit Text for Plant Title -->
     <EditText
-        android:id="@+id/editTitleText"
-        android:layout_width="wrap_content"
+        android:id="@+id/editTextPlantTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="260dp"
-        android:ems="10"
+        android:hint="Plant Title"
         android:inputType="text"
-        android:text="Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="16dp"/>
 
+    <!-- Edit Text for Plant Information -->
     <EditText
-        android:id="@+id/editInfoText"
-        android:layout_width="wrap_content"
+        android:id="@+id/editTextPlantInfo"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTitleText" />
+        android:hint="Plant Info"
+        android:inputType="textMultiLine"
+        android:gravity="top"
+        android:minHeight="100dp"
+        android:layout_marginTop="8dp"/>
 
-    <Button
-        android:id="@+id/confirmEditTitle"
-        android:layout_width="wrap_content"
+    <!-- Horizontal Layout for Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="260dp"
-        android:layout_marginEnd="32dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="end">
 
-    <Button
-        android:id="@+id/confirmEditInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmEditTitle" />
+        <!-- Confirm Button -->
+        <Button
+            android:id="@+id/buttonConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Cancel Button -->
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_marginStart="16dp"/>
+
+    </LinearLayout>
+</LinearLayout>

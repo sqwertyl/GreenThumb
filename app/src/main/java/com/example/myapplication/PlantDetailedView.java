@@ -18,29 +18,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class PlantDetailedView extends AppCompatActivity {
     private Plant plant;
     private Uri photoURI = null;
+    private String UID = null;
     private ActivityResultLauncher<Uri> takePictureLauncher;
     private static final int CAMERA_PERMISSION_CODE = 2;
-
+    private static final DatabaseReference plantDB = FirebaseDatabase.getInstance()
+            .getReference();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,13 +51,18 @@ public class PlantDetailedView extends AppCompatActivity {
                     CAMERA_PERMISSION_CODE);
         }
 
+        // get current UID
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        UID = currentUser == null ? null : currentUser.getUid();
+
         // get intent data (plant id to retrieve data from)
         String plantId = getIntent().getStringExtra("PLANT_ID");
-        if (plantId != null) {
+        if (plantId != null && UID != null) {
             Log.d("GreenThumb: PlantDetailedView", "Valid plant id, fetching data...");
             fetchPlantData(plantId);
         } else {
-            Log.d("GreenThumb: PlantDetailedView", "Error plant id ):");
+            Log.d("GreenThumb: PlantDetailedView", "Error plant or user id ):");
+            finish();
         }
 
         // on click events
@@ -94,7 +96,7 @@ public class PlantDetailedView extends AppCompatActivity {
         Obtains data from db and stores it into local plant object
      */
     private void fetchPlantData(String plantId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Plants");
+        DatabaseReference ref = plantDB.child(UID);
         ref.child(plantId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -140,7 +142,6 @@ public class PlantDetailedView extends AppCompatActivity {
         // [TODO] update for more info later
 
         // get objects to grab data from
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Plants");
         EditText title = findViewById(R.id.editTextPlantTitle);
         EditText info = findViewById(R.id.editTextPlantInfo);
 
@@ -150,7 +151,7 @@ public class PlantDetailedView extends AppCompatActivity {
         plant.setImageURL(photoURI != null ? photoURI.toString() : null); // if no update, then still null
 
         // update on database
-        ref.child(plant.getPlantId()).setValue(plant);
+        plantDB.child(UID).child(plant.getPlantId()).setValue(plant);
         Log.d("GreenThumb: PlantDetailedView", "Updated plant " + plant.getPlantId());
     }
 

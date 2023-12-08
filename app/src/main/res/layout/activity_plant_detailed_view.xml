@@ -6,55 +6,86 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Image View for Plant Image -->
-    <FrameLayout
+    <!-- Main Content Container -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imageViewPlantDetail"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabEditImage"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|top"
-            android:layout_margin="8dp"
-            android:src="@android:drawable/ic_menu_edit" /> <!-- Replace with your edit icon -->
+            android:orientation="vertical">
 
-        <!-- Your other views, such as EditTexts, Buttons, etc. -->
+            <!-- Image View for Plant Image -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </FrameLayout>
+                <ImageView
+                    android:id="@+id/imageViewPlantDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
 
-    <EditText
-        android:id="@+id/editTextPlantTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Plant Title"
-        android:inputType="text"
-        android:layout_marginTop="16dp"/>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabEditImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|top"
+                    android:layout_margin="8dp"
+                    android:src="@android:drawable/ic_menu_edit" />
 
-    <!-- Edit Text for Plant Information -->
-    <EditText
-        android:id="@+id/editTextPlantInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Plant Info"
-        android:inputType="textMultiLine"
-        android:gravity="top"
-        android:minHeight="100dp"
-        android:layout_marginTop="8dp"/>
+            </FrameLayout>
+
+            <!-- EditText for Plant Title -->
+            <EditText
+                android:id="@+id/editTextPlantTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Plant Title"
+                android:inputType="text"
+                android:layout_marginTop="16dp"/>
+
+            <!-- EditText for Plant Information -->
+            <EditText
+                android:id="@+id/editTextPlantInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="top"
+                android:hint="Plant Description"
+                android:inputType="textMultiLine"
+                android:minHeight="100dp" />
+            <EditText
+                android:id="@+id/editTextPlantHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Plant Height (cm)"
+                android:inputType="numberDecimal"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/textViewPlantHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Previous heights:"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/textViewPlantHeights"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
 
     <!-- Horizontal Layout for Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp"
         android:gravity="end">
 
         <!-- Confirm Button -->

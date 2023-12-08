@@ -22,6 +22,8 @@ public class Plant {
         this.info = info;
         imageURL = null;
         plantId = null;
+        currentHeight = null;
+        previousHeights = null;
     }
 
     public String getTitle() { return title; }

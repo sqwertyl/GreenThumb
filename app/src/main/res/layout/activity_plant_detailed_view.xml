@@ -38,16 +38,27 @@
 
             </FrameLayout>
 
-            <!-- EditText for Plant Title -->
+            <!-- Plant Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Plant title:"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
             <EditText
                 android:id="@+id/editTextPlantTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Plant Title"
-                android:inputType="text"
-                android:layout_marginTop="16dp"/>
+                android:inputType="text" />
 
-            <!-- EditText for Plant Information -->
+            <!-- Plant Information -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Plant description:"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
             <EditText
                 android:id="@+id/editTextPlantInfo"
                 android:layout_width="match_parent"
@@ -57,6 +68,14 @@
                 android:hint="Plant Description"
                 android:inputType="textMultiLine"
                 android:minHeight="100dp" />
+
+            <!-- Plant Height -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Plant height (cm):"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
             <EditText
                 android:id="@+id/editTextPlantHeight"
                 android:layout_width="match_parent"
@@ -64,13 +83,12 @@
                 android:hint="Plant Height (cm)"
                 android:inputType="numberDecimal"
                 android:layout_marginTop="8dp"/>
-
             <TextView
                 android:id="@+id/textViewPlantHeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Previous heights:"
-                android:textSize="20sp" />
+                android:text="Previous height(s) (cm):"
+                android:textSize="16sp" />
             <TextView
                 android:id="@+id/textViewPlantHeights"
                 android:layout_width="match_parent"

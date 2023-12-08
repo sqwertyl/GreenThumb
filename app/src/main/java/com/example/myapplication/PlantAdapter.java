@@ -53,7 +53,6 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantViewHolder> {
                         // add each instance of a plant
                         if (currentUser != null) {
                             for (DataSnapshot children : snapshot.getChildren()) {
-                                String UID = currentUser.getUid();
                                 Plant dbPlant = children.getValue(Plant.class);
                                 plantList.add(dbPlant);
                             }

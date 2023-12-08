@@ -17,6 +17,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -116,18 +117,21 @@ public class PlantDetailedView extends AppCompatActivity {
         Sets fetched data to views
      */
     private void setPlantViewData() {
-        // [TODO] update for more views later
-
         // if plant exists then set views to reflect plant data
         if (plant != null || plant.getPlantId() != null) {
             ImageView image = findViewById(R.id.imageViewPlantDetail);
             EditText title = findViewById(R.id.editTextPlantTitle);
             EditText info = findViewById(R.id.editTextPlantInfo);
+            EditText currentHeight = findViewById(R.id.editTextPlantHeight);
+            TextView previousHeights = findViewById(R.id.textViewPlantHeights);
 
             title.setText(plant.getTitle());
             info.setText(plant.getInfo());
             // check if custom image, otherwise keep default
             if (plant.hasImage()) image.setImageURI(Uri.parse(plant.getImageURL()));
+            if (plant.getCurrentHeight() != null) currentHeight.setText(plant.getCurrentHeight());
+            if (plant.getPreviousHeights() != null) previousHeights.setText(plant
+                    .getPreviousHeights());
 
             Log.d("GreenThumb: PlantDetailedView", "Fetched data!");
         } else {
@@ -139,16 +143,36 @@ public class PlantDetailedView extends AppCompatActivity {
         User clicked confirm button, update db
      */
     private void confirmUpdate() {
-        // [TODO] update for more info later
-
         // get objects to grab data from
         EditText title = findViewById(R.id.editTextPlantTitle);
         EditText info = findViewById(R.id.editTextPlantInfo);
+        EditText currentHeight = findViewById(R.id.editTextPlantHeight);
 
         // set plant data to data from views
         plant.setTitle(title.getText().toString());
         plant.setInfo(info.getText().toString());
         plant.setImageURL(photoURI != null ? photoURI.toString() : null); // if no update, then still null
+
+        // if height has been changed
+        String height = currentHeight.getText().toString();
+        if (height != plant.getCurrentHeight()) {
+            String prevHeight = plant.getPreviousHeights();
+            String newPrevHeight = null;
+            // if no history -> no history and no current || no history one current
+            if (prevHeight == null) {
+                // no history but one current
+                if (plant.getCurrentHeight() != null) {
+                    newPrevHeight = plant.getCurrentHeight() + "\n";
+                }
+                // otherwise don't need to update previous
+            } else { // has history
+                newPrevHeight = prevHeight.concat(plant.getCurrentHeight() + "\n");
+            }
+
+            plant.setCurrentHeight(height);
+            plant.setPreviousHeights(newPrevHeight);
+
+        }
 
         // update on database
         plantDB.child(UID).child(plant.getPlantId()).setValue(plant);

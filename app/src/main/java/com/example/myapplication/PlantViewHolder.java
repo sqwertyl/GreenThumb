@@ -14,6 +14,7 @@ public class PlantViewHolder extends RecyclerView.ViewHolder {
     private ImageView thumbnail;
     private TextView titleText;
     private TextView infoText;
+    private TextView heightText;
     private PlantAdapter adapter;
 
     /*
@@ -24,6 +25,7 @@ public class PlantViewHolder extends RecyclerView.ViewHolder {
         thumbnail = itemView.findViewById(R.id.imageViewPlant);
         titleText = itemView.findViewById(R.id.textViewTitle);
         infoText = itemView.findViewById(R.id.textViewInfo);
+        heightText = itemView.findViewById(R.id.textViewHeight);
         adapter = plantAdapter;
     }
 
@@ -34,6 +36,8 @@ public class PlantViewHolder extends RecyclerView.ViewHolder {
         // set title and info
         titleText.setText(plant.getTitle());
         infoText.setText(plant.getInfo());
+        heightText.setText(plant.getCurrentHeight() == null ? "Height: ----" : "Height: "
+                + plant.getCurrentHeight() + "cm");
 
         // if plant has custom image, use that
         if (plant.hasImage()) {
